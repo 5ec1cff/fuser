@@ -2,9 +2,11 @@ use std::env;
 
 fn main() {
     #[cfg(not(feature = "libfuse"))]
-    let out_dir = env::var("CARGO_CFG_TARGET_OS").unwrap();
-    if out_dir.as_str() != "android" && out_dir.as_str() != "linux" {
-        unimplemented!("Building without libfuse is only supported on Linux");
+    {
+        let out_dir = env::var("CARGO_CFG_TARGET_OS").unwrap();
+        if out_dir.as_str() != "android" && out_dir.as_str() != "linux" {
+            unimplemented!("Building without libfuse is only supported on Linux, target: {}", out_dir.as_str());
+        }
     }
 
     #[cfg(feature = "libfuse")]
