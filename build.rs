@@ -1,5 +1,5 @@
 fn main() {
-    #[cfg(all(not(feature = "libfuse"), not(target_os = "linux")))]
+    #[cfg(all(not(feature = "libfuse"), not(any(target_os = "linux", target_os = "android"))))]
     unimplemented!("Building without libfuse is only supported on Linux");
 
     #[cfg(feature = "libfuse")]
